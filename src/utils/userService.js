@@ -5,17 +5,22 @@ const BASE_URL = '/api/users/';
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-    headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
-    // what do datatype do you need to change this too?
-    body: JSON.stringify(user)
+    // no need for header when sending multipart form data browser auto detects and append headers.
+    // Uploading a file required doing form data
+    body: user //we set the stuff in the handleSubmit function in SignUpPage
   })
   .then(res => {
     if (res.ok) return res.json();
     // Probably a duplicate email
-    throw new Error('Email already taken!');
+    return res.json().then(response => {
+
+      console.log(response.error)
+
+      throw new Error('Email already taken!');
+    })
   })
   // Parameter destructuring!
-  .then(({token}) => tokenService.setToken(token));
+  .then(({token}) => tokenService.setToken(token)); //store the token in local sstorage, then access that token later
   // The above could have been written as
   //.then((token) => token.token);
 }

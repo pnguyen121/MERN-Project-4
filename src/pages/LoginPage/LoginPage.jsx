@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import {
@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "semantic-ui-react";
 
-export default function LoginPage(props) {
+export default function LoginPage({handleSignUpOrLogin}) {
 
   // State for the form inputs and such
   const [state, setState] = useState({
@@ -26,6 +26,8 @@ export default function LoginPage(props) {
   const [error, setError] = useState('')
 
 
+  // Navigation to work
+  const navigate = useNavigate()
 
 
   // Function to handle what is being typed into form to be in state. Use this function in form
@@ -36,6 +38,20 @@ export default function LoginPage(props) {
     })
   }
 
+  // Function to handle when submit is clicked
+  async function handleSubmit(e){
+    e.preventDefault() //prevent it from sending an HTTP request
+
+    try{
+      handleSignUpOrLogin(); //call the function from appJSX that was passedd as prop
+      navigate("/") //navigate to home route after login
+
+    } catch(err){
+      console.log(err)
+      setError(err.message)
+    }
+
+  }
 
 
 
@@ -49,7 +65,7 @@ export default function LoginPage(props) {
         <Header as="h2" color="black" textAlign="center">
           <Image src="https://i.imgur.com/ZIrCjzu.png" /> Log-in to your account
         </Header>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Segment stacked>
             <Form.Input
               type="email"
@@ -79,9 +95,9 @@ export default function LoginPage(props) {
           </Segment>
         </Form>
         <Message>
-          New Here? <Link to="/signup">Sign Up</Link>
+          New Here? <Link to="/signup">Become A Member</Link>
         </Message>
-        {/* {error ? <ErrorMessage error={error} /> : null} */}
+        {error ? <ErrorMessage error={error} /> : null}
       </Grid.Column>
     </Grid>
   );

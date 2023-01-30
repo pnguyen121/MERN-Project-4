@@ -2,6 +2,15 @@ import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
 const SECRET = process.env.SECRET;
 
+import S3 from 'aws-sdk/clients/s3.js';
+// initialize the S3 constructor
+const s3 = new S3()
+
+import { v4 as uuidv4 } from 'uuid'
+
+
+const BUCKET_NAME = process.env.BUCKET_NAME
+console.log(BUCKET_NAME, 'bucketname')
 
 
 export default {
@@ -11,7 +20,28 @@ export default {
 
 
 async function signup(req, res) {
-  const user = new User(req.body);
+
+  // S3 stuff for profile pic
+  console.log(req.body, "<--------- contents of form req.body", req.file, '<-------- REQ.FILE')
+
+  // force then to upload a photo
+  if(!req.file) return res.status(400).json({error: 'Please Upload Profile Pic'})
+
+  // Store the image in S3 bucket 
+  const filePath = `Nike/${uuidv4()}-${req.file.originalname}`
+  const params = {Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer};
+  // req.file.buffer is from the form when it was sent to our express server
+
+  // s3.upload is making the request to S3
+  s3.upload(params, async function(err, data){
+    if(err){
+      console.log(err, '<------- error from AWS, Prob telling yo your keys arent right')
+      return res.status(400).json({error: 'ERROR FROM AWS, check terminal'})
+    }
+  
+
+
+  const user = new User({...req.body, photoUrl: data.Location}); //data.Location is the url for your image on AWS
   try {
     await user.save();
     const token = createJWT(user);
@@ -20,7 +50,9 @@ async function signup(req, res) {
     // Probably a duplicate email
     res.status(400).json(err);
   }
-}
+
+  }) //end of s3
+} //end of sign up function
 
 async function login(req, res) {
  
