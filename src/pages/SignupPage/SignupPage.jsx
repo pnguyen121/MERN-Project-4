@@ -1,9 +1,27 @@
 import React from "react";
+import { useState } from "react";
 
 
 import { Form, Grid, Checkbox, Button, Header, Image, Segment, Message } from "semantic-ui-react";
 
 function SignUpPage() {
+
+const [state, setState] = useState({
+    username: "",
+    email: "",
+    password: "",
+})
+
+
+const [error, setError] = useState('')
+
+
+
+function handleChange(e){
+
+}
+
+
   return (
     <Grid
       textAlign="center"
@@ -12,7 +30,7 @@ function SignUpPage() {
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="black" textAlign="center">
-          <Image src="https://i.imgur.com/ZIrCjzu.png" /> Sign Up
+          <Image src="https://i.imgur.com/ZIrCjzu.png" /> Become A Member
         </Header>
         <Form>
           <Segment stacked>
@@ -66,7 +84,7 @@ function SignUpPage() {
               type="submit"
               className="btn"
             >
-              Login
+              SignUp
             </Button>
           </Segment>
         </Form>
