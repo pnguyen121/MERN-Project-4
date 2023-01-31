@@ -11,6 +11,7 @@ router.post('/signup', upload.single('photo'), usersCtrl.signup); //add multer t
 router.post('/login', usersCtrl.login);
 
 
+// router.get('/:username', usersCtrl.profile);
 /*---------- Protected Routes ----------*/
 
 

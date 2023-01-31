@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import "./LoginPage.css";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +16,7 @@ import {
   Segment,
   Checkbox,
 } from "semantic-ui-react";
+import userService from "../../utils/userService";
 
 export default function LoginPage({handleSignUpOrLogin}) {
 
@@ -29,7 +32,6 @@ export default function LoginPage({handleSignUpOrLogin}) {
   // Navigation to work
   const navigate = useNavigate()
 
-
   // Function to handle what is being typed into form to be in state. Use this function in form
   function handleChange(e){
     setState({
@@ -43,6 +45,8 @@ export default function LoginPage({handleSignUpOrLogin}) {
     e.preventDefault() //prevent it from sending an HTTP request
 
     try{
+      await userService.login(state)
+
       handleSignUpOrLogin(); //call the function from appJSX that was passedd as prop
       navigate("/") //navigate to home route after login
 
