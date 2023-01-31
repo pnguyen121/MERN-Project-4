@@ -11,7 +11,8 @@ const likesSchema = mongoose.Schema({
 // A post has many likes, a like belongs to a POST
 const sneakerSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model
-    name: String,
+    sneakerName: String,
+    nickname: String,
     styleCode: String,
     Price: String,
     photoUrl: String,

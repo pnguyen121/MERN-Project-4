@@ -1,19 +1,33 @@
 import { useState } from "react";
 import { Form, Segment, Button } from "semantic-ui-react";
 
-function AddSneakerForm({handleAddPost}) {
+import { useNavigate } from "react-router-dom";
 
-  const [caption, setCaption] = useState('');
+function AddSneakerForm({handleAddSneaker}) {
+
+  const [sneaker, setSneaker] = useState({
+    sneakerName: "",
+    nickname: "",
+    styleCode: "",
+    price: "",
+    description: "",
+
+  });
+  
   const [photo, setPhoto] = useState(null)
 
-  
+
   function handleChange(e){
-	setCaption(e.target.value)
+	setSneaker({
+        ...sneaker,
+        [e.target.name]: e.target.value
+    })
   }
 
   function handleFileInput(e){
 	setPhoto(e.target.files[0])
   }
+
 
   function handleSubmit(e){
 	e.preventDefault();
@@ -21,19 +35,57 @@ function AddSneakerForm({handleAddPost}) {
 	// we have to make form data because we are sending over a photo
 	// to our express server
 	const formData = new FormData()
-	formData.append('caption', caption);
+	formData.append('sneakerName', sneakerName);
+	formData.append('nickname', nickname);
+	formData.append('styleCode', styleCode);
+	formData.append('price', price);
+	formData.append('description', description);
 	formData.append('photo', photo)
-	handleAddPost(formData)
+	handleAddSneaker(formData)
+    // Could loop through it all but ddidnt
   }
 
   return (
     <Segment>
+        <h2>Add A Sneaker Card</h2>
       <Form autoComplete="off" onSubmit={handleSubmit}>
         <Form.Input
           className="form-control"
-          name="caption"
-          value={caption}
-          placeholder="What's on your pups mind?"
+          name="sneakerName"
+          value={sneaker.sneakerName}
+          placeholder="Sneaker model"
+          onChange={handleChange}
+          required
+        />
+        <Form.Input
+          className="form-control"
+          name="nickname"
+          value={sneaker.nickname}
+          placeholder="Nickname?"
+          onChange={handleChange}
+          required
+        />
+        <Form.Input
+          className="form-control"
+          name="styleCode"
+          value={sneaker.styleCode}
+          placeholder="Style Code"
+          onChange={handleChange}
+          required
+        />
+        <Form.Input
+          className="form-control"
+          name="price"
+          value={sneaker.price}
+          placeholder="Price"
+          onChange={handleChange}
+          required
+        />
+        <Form.TextArea
+          className="form-control"
+          name="description"
+          value={sneaker.description}
+          placeholder="Description"
           onChange={handleChange}
           required
         />
@@ -45,11 +97,11 @@ function AddSneakerForm({handleAddPost}) {
           onChange={handleFileInput}
         />
         <Button type="submit" className="btn">
-          ADD PUPPY
+          ADD SNEAKER
         </Button>
       </Form>
     </Segment>
   );
 }
 
-export default AddPuppyForm;
+export default AddSneakerForm;
