@@ -17,6 +17,9 @@ function AddSneakerForm({handleAddSneaker}) {
   const [photo, setPhoto] = useState(null)
 
 
+//   set up navigate
+  const navigate = useNavigate()
+
   function handleChange(e){
 	setSneaker({
         ...sneaker,
@@ -30,19 +33,24 @@ function AddSneakerForm({handleAddSneaker}) {
 
 
   function handleSubmit(e){
+    console.log("handlesubmit just ran for sneakerForm")
 	e.preventDefault();
 
 	// we have to make form data because we are sending over a photo
 	// to our express server
 	const formData = new FormData()
-	formData.append('sneakerName', sneakerName);
-	formData.append('nickname', nickname);
-	formData.append('styleCode', styleCode);
-	formData.append('price', price);
-	formData.append('description', description);
+	formData.append('sneakerName', sneaker.sneakerName);
+	formData.append('nickname', sneaker.nickname);
+	formData.append('styleCode', sneaker.styleCode);
+	formData.append('price', sneaker.price);
+	formData.append('description', sneaker.description);
 	formData.append('photo', photo)
 	handleAddSneaker(formData)
     // Could loop through it all but ddidnt
+
+    // navigate to feed page
+    navigate("/")
+
   }
 
   return (

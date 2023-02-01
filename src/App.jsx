@@ -10,6 +10,8 @@ import SignUpPage from "./pages/SignupPage/SignupPage";
 import FeedPage from "./pages/FeedPage/FeedPage";
 import AddSneakerForm from "./components/AddSneakerForm/AddSneakerForm";
 
+import * as sneakersAPI from "./utils/sneakerApi"
+
 function App() {
   const [user, setUser] = useState(userService.getUser()); //setting state to see if there is a token present already. if there is grab it and set it in state
 
@@ -25,7 +27,7 @@ function App() {
 
 
   // ADD SNEAKER FORM STUFF
-  const [sneakerCard, setSneakerCardd] = useState([]);
+  const [sneakerCard, setSneakerCard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -34,6 +36,7 @@ function App() {
 
 
   async function handleAddSneaker(sneaker) {
+    console.log("handleAddSneaker got hit")
     try {
         // this is where we will make the api call to our server
         // because we'll get the response and then we can update state to reflect that change
@@ -43,7 +46,7 @@ function App() {
   
         // data is the response from the api, the result of the .then if(res.ok) return res.json() in the create postAPI utils function
         console.log(response, "<----- handleAddSneaker");
-        setPosts([response.post, ...posts]); /// ...posts would keep all the posts in the previous states array
+        setSneakerCard([response.sneaker, ...sneakerCard]); /// ...posts would keep all the posts in the previous states array
         setLoading(false);
       } catch (err) {
         // this is the error from the throw block, in the postsAPI.create function

@@ -11,3 +11,10 @@ const upload = multer()
 
 // Get route to see all sneaker cards posted
 router.post('/', upload.single('photo'), sneakersCtrl.create)
+
+// GET / read all the data
+router.get('/', sneakersCtrl.index)
+
+
+
+export default router;

@@ -2,6 +2,7 @@
 import tokenService from "./tokenService";
 
 const BASE_URL = '/api/sneakers/';
+// YOU HAVE TO SET IT UP IN SERVER.JS <- ROUTES
 // THESE FUNCTIONS ARE CALLED In our componets 
 // in the browser to communicate with our EXPRESS SERVER
 // aka the endpoints are our servers routes, which call the controller functions
@@ -27,3 +28,14 @@ export function create(data){
         })
     })
 }
+
+
+
+export function getAll() {
+	return fetch(BASE_URL, {
+	  headers: {
+		'Authorization': 'Bearer ' + tokenService.getToken()
+	  }
+	})
+	.then(res => res.json());
+  }

@@ -31,8 +31,10 @@ import auth from './config/auth.js'
 app.use(auth); 
 // api routes must be before the "catch all" route
 import userRoutes from './routes/api/users.js';
+import sneakerRoutes from './routes/api/sneakers.js'
 
 app.use('/api/users', userRoutes);
+app.use('/api/sneakers', sneakerRoutes)
 // "catch all" route
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
