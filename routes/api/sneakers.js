@@ -15,6 +15,8 @@ router.post('/', upload.single('photo'), sneakersCtrl.create)
 // GET / read all the data
 router.get('/', sneakersCtrl.index)
 
+router.get('/:sneaker', sneakersCtrl.show)
+
 
 
 export default router;

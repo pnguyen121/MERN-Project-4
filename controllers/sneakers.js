@@ -2,9 +2,7 @@
 
 import Sneaker from "../models/sneaker.js";
 
-import S3 from 'aws-sdk/clients/s3.js';
-// initialize the S3 constructor
-const s3 = new S3()
+import {s3} from '../config/s3-config.js'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -14,6 +12,7 @@ const BUCKET_NAME = process.env.BUCKET_NAME
 export default {
     create,
     index,
+    show,
 }
 
 function create(req, res) {
@@ -69,3 +68,18 @@ function create(req, res) {
       }
   }
 
+
+
+  async function show(req, res){
+    try {
+      // First find the user using the params from the request
+      // findOne finds first match, its useful to have unique usernames!
+      // Then find all the posts that belong to that user
+      const sneaker = await Sneaker.findById(req.params.id);
+      console.log(sneaker, '<---- sneaker on show sneaker function')
+      res.status(200).json(sneaker)
+    } catch(err){
+      console.log(err)
+      res.status(400).json({err})
+    }
+  }

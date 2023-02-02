@@ -8,6 +8,7 @@ import userService from "./utils/userService";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignupPage/SignupPage";
 import FeedPage from "./pages/FeedPage/FeedPage";
+import DetailPage from "./pages/DetailPage/DetailPage";
 import AddSneakerForm from "./components/AddSneakerForm/AddSneakerForm";
 
 import * as sneakersAPI from "./utils/sneakerApi"
@@ -74,7 +75,12 @@ function App() {
           path="/addsneaker"
           element={<AddSneakerForm handleAddSneaker={handleAddSneaker}/>}
         />
+        <Route
+      path="/:sneaker/:sneakerName"
+      element={<DetailPage loggedUser={user} handleLogout={handleLogout}/>}
+    />
       </Routes>
+
     );
   }
 
@@ -91,6 +97,10 @@ return (
     <Route
       path="/signup"
       element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+    />
+    <Route
+      path="/:sneaker/:sneakerName"
+      element={<DetailPage loggedUser={user} handleLogout={handleLogout}/>}
     />
   </Routes>
 )
