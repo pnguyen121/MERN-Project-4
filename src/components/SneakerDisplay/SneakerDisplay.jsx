@@ -11,6 +11,7 @@ function SneakerDisplay({
   isProfile,
   loading,
   numPhotosCol,
+  handleDeleteSneaker,
 }) {
   if (loading) {
     return (
@@ -35,6 +36,7 @@ function SneakerDisplay({
               //   addLike={addLike}
               //   removeLike={removeLike}
               loggedUser={loggedUser}
+              handleDeleteSneaker={handleDeleteSneaker}
             />
           );
         })}

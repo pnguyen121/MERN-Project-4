@@ -13,6 +13,7 @@ export default {
     create,
     index,
     show,
+    deleteSneaker,
 }
 
 function create(req, res) {
@@ -81,5 +82,18 @@ function create(req, res) {
     } catch(err){
       console.log(err)
       res.status(400).json({err})
+    }
+  }
+
+
+
+//   Delete function
+
+  async function deleteSneaker(req, res){
+    try {
+        await Sneaker.findByIdAndDelete(req.params.id);
+        res.json({ data: 'sneaker deleted' })
+    } catch (err) {
+        res.status(400).json({ err });
     }
   }

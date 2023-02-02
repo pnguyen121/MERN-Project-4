@@ -43,16 +43,30 @@ export function getAll() {
 
 
 
-export function getSneaker(sneaker){
-    return fetch(BASE_URL + sneaker, {
+export function getSneaker(sneakerId){
+    return fetch(`${BASE_URL}/${sneakerId}`, {
         method: 'GET',
-        // headers: {
-        //         Authorization: "Bearer " + tokenService.getToken() 
-        //         //this is how we grab the token from local storage
-        //     }
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: "Bearer " + tokenService.getToken(),
+        }
       }).then(res => {
         if(res.ok) return res.json() // decoding the json from the server response
         // so that we can interact with it like a regular javascript object
-        throw new Error('Error from getProfile request, check the server terminal')
+        throw new Error('Error from getSneaker request in API, check the server terminal')
       })
+}
+
+
+export function deleteSneaker(sneakerId) {
+    return fetch(`${BASE_URL}/${sneakerId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: "Bearer " + tokenService.getToken(),
+        }
+    }).then((res) => {
+        if (res.ok) return res.json();
+        throw new Error(res.error);
+    })
 }

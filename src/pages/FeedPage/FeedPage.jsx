@@ -13,6 +13,23 @@ function FeedPage({ loggedUser, handleLogout }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+
+
+
+
+  async function handleDeleteSneaker(sneakerId){
+    try {
+        const response = await sneakersAPI.deleteSneaker(sneakerId);
+        console.log(response, ", delete sneaker");
+        getSneakerPosts();
+    } catch (err) {
+        console.log(err);
+        setError("Sneaker not deleting");
+    }
+  }
+
+
+
   // get all sneakerPosts function
   async function getSneakerPosts() {
     try {
@@ -50,14 +67,15 @@ function FeedPage({ loggedUser, handleLogout }) {
           
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        <Grid.Column style={{ maxWidth: 700 }}>
+      <Grid.Row columns={3}>
+        <Grid.Column width={14} style={{ maxWidth: 600 }}>
           <SneakerDisplay
             sneakerCards={sneakerCards}
             loggedUser={loggedUser}
             isProfile={false}
             loading={loading}
             numPhotosCol={3}
+            handleDeleteSneaker={handleDeleteSneaker}
           />
         </Grid.Column>
       </Grid.Row>
