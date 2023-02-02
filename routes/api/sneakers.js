@@ -18,8 +18,8 @@ router.get('/', sneakersCtrl.index)
 // Delete function
 router.delete('/:id', sneakersCtrl.deleteSneaker)
 
-
-router.get('/sneakers/:id', sneakersCtrl.show)
+// Show 
+router.get('/:sneakerName', sneakersCtrl.show)
 
 
 

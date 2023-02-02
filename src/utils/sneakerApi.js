@@ -41,13 +41,22 @@ export function getAll() {
   }
 
 
+// export function getSneaker(sneakerName) {
+// 	return fetch(BASE_URL + sneakerName, {
+// 	  headers: {
+// 		'Authorization': 'Bearer ' + tokenService.getToken()
+// 	  }
+// 	})
+// 	.then(res => res.json());
+//   }
 
 
-export function getSneaker(sneakerId){
-    return fetch(`${BASE_URL}/${sneakerId}`, {
+
+
+export function getSneaker(sneakerName){
+    return fetch(`${BASE_URL}${sneakerName}`, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: "Bearer " + tokenService.getToken(),
         }
       }).then(res => {

@@ -76,9 +76,10 @@ function create(req, res) {
       // First find the user using the params from the request
       // findOne finds first match, its useful to have unique usernames!
       // Then find all the posts that belong to that user
-      const sneaker = await Sneaker.findById(req.params.id);
+      const sneaker = await Sneaker.findOne({sneakerName: req.params.sneakerName});
+      if(!sneaker) return res.status(400).json({error: 'Sneaker not foundd'})
       console.log(sneaker, '<---- sneaker on show sneaker function')
-      res.status(200).json(sneaker)
+      res.status(200).json({data: sneaker})
     } catch(err){
       console.log(err)
       res.status(400).json({err})

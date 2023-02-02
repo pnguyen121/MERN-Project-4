@@ -14,7 +14,7 @@ const sneakerSchema = new mongoose.Schema({
     sneakerName: String,
     nickname: String,
     styleCode: String,
-    Price: String,
+    price: String,
     photoUrl: String,
     description: String,
     likes: [likesSchema] // embedded schema// One Post has many Likes!
