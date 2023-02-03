@@ -7,13 +7,39 @@ import SneakerCard from "../../components/SneakerCard.jsx/SneakerCard";
 import SneakerDisplay from "../../components/SneakerDisplay/SneakerDisplay";
 
 import * as sneakersAPI from "../../utils/sneakerApi";
+import * as likesAPI from "../../utils/likeApi"
 
-function FeedPage({ loggedUser, handleLogout }) {
+function FeedPage({ loggedUser, handleLogout, toggle }) {
   const [sneakerCards, setSneakerCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
 
+//   LIKES
+async function addLike(sneakerId) {
+    // postId exists in the card component
+    console.log("AddLike just ran")
+    try {
+      const response = await likesAPI.create(sneakerId);
+      console.log(response, " response from likes APi");
+      // update the cards with likes array
+      getSneakerPosts();// getPosts updates our state, so we'll see a change in the UI, heart will go to red
+    } catch (err) {
+      console.log(err.message, " add like");
+    }
+  }
+
+  async function removeLike(likeId) {
+    // postId exists in the card component
+    try {
+      const response = await likesAPI.deleteLike(likeId);
+      console.log(response, " response from likes APi");
+      // update the cards with likes array
+      getSneakerPosts();// getPosts updates our state, so we'll see a change in the UI, heart will go to grey
+    } catch (err) {
+      console.log(err.message, " remove like");
+    }
+  }
 
 
 
@@ -46,7 +72,7 @@ function FeedPage({ loggedUser, handleLogout }) {
   // On page load run this stuff
   useEffect(() => {
     getSneakerPosts();
-  }, [setSneakerCards]);
+  }, [toggle]);
 
   return (
     <Grid centered>
@@ -76,6 +102,8 @@ function FeedPage({ loggedUser, handleLogout }) {
             loading={loading}
             numPhotosCol={3}
             handleDeleteSneaker={handleDeleteSneaker}
+            addLike={addLike}
+            removeLike={removeLike}
           />
         </Grid.Column>
       </Grid.Row>

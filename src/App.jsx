@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import userService from "./utils/userService";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -27,7 +27,7 @@ function App() {
   }
 
   // ADD SNEAKER FORM STUFF
-  const [sneakerCard, setSneakerCard] = useState([]);
+  const [toggle, setToggle] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -44,7 +44,7 @@ function App() {
 
       // data is the response from the api, the result of the .then if(res.ok) return res.json() in the create postAPI utils function
       console.log(response, "<----- handleAddSneaker");
-      setSneakerCard([response.sneaker, ...sneakerCard]); /// ...posts would keep all the posts in the previous states array
+      setToggle(!toggle)
       setLoading(false);
     } catch (err) {
       // this is the error from the throw block, in the postsAPI.create function
@@ -53,12 +53,16 @@ function App() {
     }
   }
 
+  
+
+
+
   if (user) {
     return (
       <Routes>
         <Route
           path="/"
-          element={<FeedPage loggedUser={user} handleLogout={handleLogout} />}
+          element={<FeedPage loggedUser={user} handleLogout={handleLogout} toggle={toggle}/>}
         />
         <Route
           path="/login"

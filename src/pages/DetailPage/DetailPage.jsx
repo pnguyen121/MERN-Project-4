@@ -42,15 +42,16 @@ function DetailPage({ loggedUser, handleLogout }) {
     }
   }
 
+
+
   useEffect(() => {
     getSneaker();
   }, [sneakerName]);
 
-
   if (error) {
     return (
       <>
-        <NavBar handleLogout={handleLogout} loggedUser={loggedUser}/>
+        <NavBar handleLogout={handleLogout} loggedUser={loggedUser} />
         <ErrorMessage error={error} />;
       </>
     );
@@ -68,16 +69,12 @@ function DetailPage({ loggedUser, handleLogout }) {
           {/* prob change this whole thing to postdisplay */}
         </Grid.Column>
 
-        <Grid.Column style={{ maxWidth: 600 }}>
-          
-        </Grid.Column>
-        <Grid.Column style={{ maxWidth: 600 }}>
-          
-        </Grid.Column>
+        <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
+        <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
       </Grid.Row>
       <Grid.Row columns={3}>
         <Grid.Column width={14} style={{ maxWidth: 600 }}>
-          <DetailDisplay sneakers={sneakers}/>
+          <DetailDisplay sneakers={sneakers} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

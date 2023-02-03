@@ -12,6 +12,8 @@ function SneakerDisplay({
   loading,
   numPhotosCol,
   handleDeleteSneaker,
+  addLike,
+  removeLike,
 }) {
   if (loading) {
     return (
@@ -25,23 +27,21 @@ function SneakerDisplay({
   }
 
   return (
-    
-      <Card.Group itemsPerRow={numPhotosCol}>
-        {sneakerCards.map((sneaker) => {
-          return (
-            <SneakerCard
-              sneaker={sneaker}
-              key={sneaker._id}
-              isProfile={isProfile}
-              //   addLike={addLike}
-              //   removeLike={removeLike}
-              loggedUser={loggedUser}
-              handleDeleteSneaker={handleDeleteSneaker}
-            />
-          );
-        })}
-      </Card.Group>
-    
+    <Card.Group itemsPerRow={numPhotosCol}>
+      {sneakerCards.map((sneaker) => {
+        return (
+          <SneakerCard
+            sneaker={sneaker}
+            key={sneaker._id}
+            isProfile={isProfile}
+            addLike={addLike}
+            removeLike={removeLike}
+            loggedUser={loggedUser}
+            handleDeleteSneaker={handleDeleteSneaker}
+          />
+        );
+      })}
+    </Card.Group>
   );
 }
 

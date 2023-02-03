@@ -34,9 +34,11 @@ app.use(auth);
 // api routes must be before the "catch all" route
 import userRoutes from './routes/api/users.js';
 import sneakerRoutes from './routes/api/sneakers.js'
+import likeRoutes from './routes/api/likes.js'
 
 app.use('/api/users', userRoutes);
 app.use('/api/sneakers', sneakerRoutes)
+app.use('/api', likeRoutes);
 // "catch all" route
 app.use(express.static(path.join(__dirname, "dist")));
 
