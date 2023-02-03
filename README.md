@@ -28,7 +28,7 @@ POV is from an Admin view point
 5. An admin can continually add sneakers to keep it up to date.
 
 
-# ATM Works Screenshots:
+# Screenshots:
 
 ![Login Page](https://imgur.com/qEGkjyT.png)
 
