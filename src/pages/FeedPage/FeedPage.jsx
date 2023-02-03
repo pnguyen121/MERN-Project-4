@@ -46,7 +46,7 @@ function FeedPage({ loggedUser, handleLogout }) {
   // On page load run this stuff
   useEffect(() => {
     getSneakerPosts();
-  }, []);
+  }, [setSneakerCards]);
 
   return (
     <Grid centered>

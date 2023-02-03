@@ -61,7 +61,7 @@ function AddSneakerForm({handleAddSneaker}) {
           className="form-control"
           name="sneakerName"
           value={sneaker.sneakerName}
-          placeholder="Sneaker model"
+          placeholder="Sneaker Model"
           onChange={handleChange}
           required
         />
@@ -69,7 +69,7 @@ function AddSneakerForm({handleAddSneaker}) {
           className="form-control"
           name="nickname"
           value={sneaker.nickname}
-          placeholder="Nickname?"
+          placeholder="Nickname"
           onChange={handleChange}
           required
         />
