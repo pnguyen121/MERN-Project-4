@@ -41,13 +41,16 @@ function SneakerCard({
       <Card.Content extra>
         <Icon name={"heart"} size="large" color={likeColor} onClick={clickHandler}/>
         {sneaker.likes.length} Likes
-        <Button
-          floated="right"
-          icon
-          onClick={() => handleDeleteSneaker(sneaker._id)}
-        >
-          <Icon name="trash" />
-        </Button>
+        
+        {sneaker.user._id === loggedUser._id && (
+            <Button
+            floated="right"
+            icon
+            onClick={() => handleDeleteSneaker(sneaker._id)}
+          >
+            <Icon name="trash" />
+            </Button>
+        )}
       </Card.Content>
     </Card>
   );
