@@ -21,6 +21,7 @@ router.delete('/:id', sneakersCtrl.deleteSneaker)
 // Show 
 router.get('/:sneakerName', sneakersCtrl.show)
 
-
+// UPDATE BRANCH
+router.get('/sneakers/:id/edit', sneakersCtrl.edit)
 
 export default router;
