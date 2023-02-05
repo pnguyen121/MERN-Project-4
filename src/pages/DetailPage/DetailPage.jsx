@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/Footer/Footer";
 import SneakerCard from "../../components/SneakerCard.jsx/SneakerCard";
 import SneakerDisplay from "../../components/SneakerDisplay/SneakerDisplay";
 import DetailDisplay from "../../components/DetailDisplay/DetailDisplay";
@@ -42,8 +43,6 @@ function DetailPage({ loggedUser, handleLogout }) {
     }
   }
 
-
-
   useEffect(() => {
     getSneaker();
   }, [sneakerName]);
@@ -58,26 +57,29 @@ function DetailPage({ loggedUser, handleLogout }) {
   }
 
   return (
-    <Grid centered>
-      <Grid.Row>
-        <Grid.Column>
-          <NavBar loggedUser={loggedUser} handleLogout={handleLogout} />
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row columns={3}>
-        <Grid.Column style={{ maxWidth: 600 }}>
-          {/* prob change this whole thing to postdisplay */}
-        </Grid.Column>
+    <>
+      <Grid centered>
+        <Grid.Row>
+          <Grid.Column>
+            <NavBar loggedUser={loggedUser} handleLogout={handleLogout} />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={3}>
+          <Grid.Column style={{ maxWidth: 600 }}>
+            {/* prob change this whole thing to postdisplay */}
+          </Grid.Column>
 
-        <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
-        <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
-      </Grid.Row>
-      <Grid.Row columns={3}>
-        <Grid.Column width={14} style={{ maxWidth: 600 }}>
-          <DetailDisplay sneakers={sneakers} />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+          <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
+          <Grid.Column style={{ maxWidth: 600 }}></Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={3}>
+          <Grid.Column width={14} style={{ maxWidth: 600 }}>
+            <DetailDisplay sneakers={sneakers} />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <Footer />
+    </>
   );
 }
 
