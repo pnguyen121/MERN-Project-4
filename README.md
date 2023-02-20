@@ -7,6 +7,7 @@
 # Entity Relationship Diagram (ERD), Wireframe, and Project Management 
 
 **Project Management Via Trello:** https://trello.com/b/LjKSmdnG/mern-project-4
+
 *Trello is a visual tool that empowers the management of projects, workflow, and task tracking.*
 
 Feel free to stay up to date with development changes and plans for this project through the Trello link above!
